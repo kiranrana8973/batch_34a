@@ -16,20 +16,24 @@ class _FirstViewState extends State<FirstView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("First Viewsd"),
+        title: Text("Arithmetic View"),
         centerTitle: true,
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.amber,
         elevation: 0,
       ),
       body: Column(
         children: [
           TextField(
+            decoration: InputDecoration(labelText: 'Enter first no'),
+            keyboardType: TextInputType.number,
             onChanged: (value) {
               first = int.parse(value);
             },
           ),
           SizedBox(height: 8),
           TextField(
+            decoration: InputDecoration(hintText: 'Enter second no'),
+            keyboardType: TextInputType.number,
             onChanged: (value) {
               second = int.parse(value);
             },
