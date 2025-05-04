@@ -1,5 +1,4 @@
-
-import 'package:batch_34a/view/first_view.dart' show FirstView;
+import 'package:batch_34a/view/dashboard_view.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -7,6 +6,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: FirstView());
+    return MaterialApp(home: DashboardView());
   }
 }
