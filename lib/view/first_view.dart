@@ -8,9 +8,13 @@ class FirstView extends StatefulWidget {
 }
 
 class _FirstViewState extends State<FirstView> {
-  int first = 0;
-  int second = 0;
+  // int first = 0;
+  // int second = 0;
   int result = 0;
+
+  // textEditiingController
+  final firstContoller = TextEditingController(text: "100");
+  final secondContoller = TextEditingController(text: "200");
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +29,7 @@ class _FirstViewState extends State<FirstView> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            TextField(
+            TextFormField(
               decoration: InputDecoration(
                 labelText: 'Enter first no',
                 border: OutlineInputBorder(
@@ -34,12 +38,16 @@ class _FirstViewState extends State<FirstView> {
                 ),
               ),
               keyboardType: TextInputType.number,
-              onChanged: (value) {
-                first = int.parse(value);
+              controller: firstContoller,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter a number';
+                }
+                return null;
               },
             ),
             SizedBox(height: 8),
-            TextField(
+            TextFormField(
               decoration: InputDecoration(
                 hintText: 'Enter second no',
                 border: OutlineInputBorder(
@@ -48,9 +56,10 @@ class _FirstViewState extends State<FirstView> {
                 ),
               ),
               keyboardType: TextInputType.number,
-              onChanged: (value) {
-                second = int.parse(value);
-              },
+              // onChanged: (value) {
+              //   second = int.parse(value);
+              // },
+              controller: secondContoller,
             ),
             SizedBox(height: 8),
             SizedBox(
@@ -64,7 +73,7 @@ class _FirstViewState extends State<FirstView> {
                 ),
                 onPressed: () {
                   setState(() {
-                    result = first + second;
+                    // result = first + second;
                   });
                 },
                 child: Text("Add"),
