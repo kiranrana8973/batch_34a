@@ -8,8 +8,6 @@ class FirstView extends StatefulWidget {
 }
 
 class _FirstViewState extends State<FirstView> {
-  // int first = 0;
-  // int second = 0;
   int result = 0;
 
   // textEditiingController
@@ -18,6 +16,32 @@ class _FirstViewState extends State<FirstView> {
 
   // step 1. key
   final myKey = GlobalKey<FormState>();
+
+  String? groupValue = "myGroup";
+
+  void calculate() {
+    if (groupValue == "add") {
+      setState(() {
+        result =
+            int.parse(firstContoller.text) + int.parse(secondContoller.text);
+      });
+    } else if (groupValue == "sub") {
+      setState(() {
+        result =
+            int.parse(firstContoller.text) - int.parse(secondContoller.text);
+      });
+    } else if (groupValue == "mul") {
+      setState(() {
+        result =
+            int.parse(firstContoller.text) * int.parse(secondContoller.text);
+      });
+    } else if (groupValue == "div") {
+      setState(() {
+        result =
+            int.parse(firstContoller.text) ~/ int.parse(secondContoller.text);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +94,54 @@ class _FirstViewState extends State<FirstView> {
                 controller: secondContoller,
               ),
               SizedBox(height: 8),
+              ListTile(
+                title: const Text('Addition'),
+                leading: Radio(
+                  value: 'add',
+                  groupValue: groupValue,
+                  onChanged: (value) {
+                    setState(() {
+                      groupValue = value!;
+                    });
+                  },
+                ),
+              ),
+              ListTile(
+                title: const Text('Subtraction'),
+                leading: Radio(
+                  value: 'sub',
+                  groupValue: groupValue,
+                  onChanged: (value) {
+                    setState(() {
+                      groupValue = value!;
+                    });
+                  },
+                ),
+              ),
+              ListTile(
+                title: const Text('Multiplication'),
+                leading: Radio(
+                  value: 'mul',
+                  groupValue: groupValue,
+                  onChanged: (value) {
+                    setState(() {
+                      groupValue = value!;
+                    });
+                  },
+                ),
+              ),
+              ListTile(
+                title: const Text('Division'),
+                leading: Radio(
+                  value: 'div',
+                  groupValue: groupValue,
+                  onChanged: (value) {
+                    setState(() {
+                      groupValue = value!;
+                    });
+                  },
+                ),
+              ),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -81,15 +153,10 @@ class _FirstViewState extends State<FirstView> {
                   ),
                   onPressed: () {
                     if (myKey.currentState!.validate()) {
-                      // Logic
-                      int first = int.parse(firstContoller.text);
-                      int second = int.parse(secondContoller.text);
-                      setState(() {
-                        result = first + second;
-                      });
+                      calculate();
                     }
                   },
-                  child: Text("Add"),
+                  child: Text("Calculate"),
                 ),
               ),
               SizedBox(height: 8),
