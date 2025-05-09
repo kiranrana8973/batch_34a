@@ -1,13 +1,16 @@
+import 'package:batch_34a/model/arithmetic_model.dart';
 import 'package:flutter/material.dart';
 
-class FirstView extends StatefulWidget {
-  const FirstView({super.key});
+class ArithmeticView extends StatefulWidget {
+  const ArithmeticView({super.key});
 
   @override
-  State<FirstView> createState() => _FirstViewState();
+  State<ArithmeticView> createState() => _ArithmeticViewState();
 }
 
-class _FirstViewState extends State<FirstView> {
+class _ArithmeticViewState extends State<ArithmeticView> {
+  late ArithmeticModel arithmeticModel;
+
   int result = 0;
 
   // textEditiingController
@@ -20,25 +23,26 @@ class _FirstViewState extends State<FirstView> {
   String? groupValue = "myGroup";
 
   void calculate() {
+    arithmeticModel = ArithmeticModel(
+      first: int.parse(firstContoller.text),
+      second: int.parse(secondContoller.text),
+    );
+
     if (groupValue == "add") {
       setState(() {
-        result =
-            int.parse(firstContoller.text) + int.parse(secondContoller.text);
+        result = arithmeticModel.add();
       });
     } else if (groupValue == "sub") {
       setState(() {
-        result =
-            int.parse(firstContoller.text) - int.parse(secondContoller.text);
+        result = arithmeticModel.sub();
       });
     } else if (groupValue == "mul") {
       setState(() {
-        result =
-            int.parse(firstContoller.text) * int.parse(secondContoller.text);
+        result = arithmeticModel.mul();
       });
     } else if (groupValue == "div") {
       setState(() {
-        result =
-            int.parse(firstContoller.text) ~/ int.parse(secondContoller.text);
+        result = arithmeticModel.div().toInt();
       });
     }
   }

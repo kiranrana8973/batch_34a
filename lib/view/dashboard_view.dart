@@ -1,4 +1,4 @@
-import 'package:batch_34a/view/first_view.dart';
+import 'package:batch_34a/view/arithmetic_view.dart';
 import 'package:batch_34a/view/si_view.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +19,7 @@ class DashboardView extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (_) {
-                      return const FirstView();
+                      return const ArithmeticView();
                     },
                   ),
                 );
