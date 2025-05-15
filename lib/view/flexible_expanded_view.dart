@@ -1,3 +1,4 @@
+import 'package:batch_34a/common/my_snackbar.dart';
 import 'package:flutter/material.dart';
 
 class FlexibleExpandedView extends StatelessWidget {
@@ -12,13 +13,7 @@ class FlexibleExpandedView extends StatelessWidget {
             flex: 1,
             child: GestureDetector(
               onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text("Container 1 tapped"),
-                    backgroundColor: Colors.yellow,
-                    behavior: SnackBarBehavior.floating,
-                  ),
-                );
+                showMySnackbar(context: context, content: "COntainer 1 tapped");
               },
               child: Container(
                 alignment: Alignment.center,
@@ -32,12 +27,10 @@ class FlexibleExpandedView extends StatelessWidget {
             flex: 2,
             child: GestureDetector(
               onDoubleTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text("Container 2 tapped"),
-                    backgroundColor: Colors.red,
-                    behavior: SnackBarBehavior.floating,
-                  ),
+                showMySnackbar(
+                  context: context,
+                  content: "COntainer 2 tapped",
+                  color: Colors.red,
                 );
               },
               child: Container(
