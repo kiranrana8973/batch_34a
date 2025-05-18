@@ -9,6 +9,13 @@ showMySnackbar({
     SnackBar(
       content: Text(content),
       backgroundColor: color ?? Colors.green,
+      duration: Duration(seconds: 2),
+      action: SnackBarAction(
+        label: 'OK',
+        onPressed: () {
+          // Some code to undo the change.
+        },
+      ),
       behavior: SnackBarBehavior.floating,
     ),
   );
