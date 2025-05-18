@@ -12,6 +12,7 @@ class CommonCardView extends StatelessWidget {
       height: 200,
       width: double.infinity,
       child: Card(
+        elevation: 5,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
           side: const BorderSide(

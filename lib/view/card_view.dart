@@ -8,12 +8,18 @@ class CardView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Card View')),
-      body: Column(
-        children: [
-          const CommonCardView(title: "Card 1", color: Colors.red),
-          const CommonCardView(title: "Card 2", color: Colors.green),
-          const CommonCardView(title: "Card 3", color: Colors.blue),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            for (int i = 0; i < 100; i++) ...{
+              if (i % 2 == 0) ...{
+                CommonCardView(title: "Card $i", color: Colors.blue),
+              } else ...{
+                CommonCardView(title: "Card $i", color: Colors.red),
+              },
+            },
+          ],
+        ),
       ),
     );
   }
