@@ -1,4 +1,4 @@
-import 'package:batch_34a/view/card_view.dart';
+import 'package:batch_34a/view/grid_screen.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -6,6 +6,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: CardView());
+    return MaterialApp(home: GridScreen());
   }
 }

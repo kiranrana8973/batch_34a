@@ -1,4 +1,5 @@
 import 'package:batch_34a/common/common_card_view.dart';
+import 'package:batch_34a/common/my_snackbar.dart';
 import 'package:flutter/material.dart';
 
 class CardView extends StatelessWidget {
@@ -13,9 +14,27 @@ class CardView extends StatelessWidget {
           children: [
             for (int i = 0; i < 100; i++) ...{
               if (i % 2 == 0) ...{
-                CommonCardView(title: "Card $i", color: Colors.blue),
+                GestureDetector(
+                  onTap: () {
+                    showMySnackbar(
+                      context: context,
+                      content: "Card $i",
+                      color: Colors.blue,
+                    );
+                  },
+                  child: CommonCardView(title: "Card $i", color: Colors.blue),
+                ),
               } else ...{
-                CommonCardView(title: "Card $i", color: Colors.red),
+                GestureDetector(
+                  onTap: () {
+                    showMySnackbar(
+                      context: context,
+                      content: "Card $i",
+                      color: Colors.red,
+                    );
+                  },
+                  child: CommonCardView(title: "Card $i", color: Colors.red),
+                ),
               },
             },
           ],

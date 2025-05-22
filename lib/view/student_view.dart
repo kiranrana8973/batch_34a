@@ -1,3 +1,5 @@
+import 'package:batch_34a/model/student.dart';
+import 'package:batch_34a/view/output_view.dart';
 import 'package:flutter/material.dart';
 
 class StudentView extends StatefulWidget {
@@ -8,9 +10,13 @@ class StudentView extends StatefulWidget {
 }
 
 class _StudentViewState extends State<StudentView> {
-  final lstCity = ["Kathmandu", "Bhaktapur", "Lalitpur", "Pokhara"];
+  final lstCity = [
+    DropdownMenuItem(value: "Kathmandu", child: Text("Kathmandu")),
+    DropdownMenuItem(value: "Bhaktapur", child: Text("Bhaktapur")),
+    DropdownMenuItem(value: "Lalitpur", child: Text("Lalitpur")),
+  ];
 
-  final lstStudent = [];
+  final List<Student> lstStudent = [];
   final fnameController = TextEditingController();
   final lnameController = TextEditingController();
 
@@ -75,10 +81,8 @@ class _StudentViewState extends State<StudentView> {
                   ),
                 ),
                 value: selectedCity,
-                items:
-                    lstCity.map((city) {
-                      return DropdownMenuItem(value: city, child: Text(city));
-                    }).toList(),
+                items: lstCity,
+
                 onChanged: (value) {
                   setState(() {
                     selectedCity = value;
@@ -99,17 +103,15 @@ class _StudentViewState extends State<StudentView> {
                 ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    lstStudent.add({
-                      "first_name": fnameController.text,
-                      "last_name": lnameController.text,
-                      "city": selectedCity,
-                    });
+                    lstStudent.add(
+                      Student(
+                        fname: fnameController.text,
+                        lname: lnameController.text,
+                        city: selectedCity!,
+                      ),
+                    );
+                    // Refresh the form fields
                     setState(() {});
-                    // fnameController.clear();
-                    // lnameController.clear();
-                    // setState(() {
-                    //   selectedCity = null;
-                    // });
                   }
                 },
                 child: const Text("Submit"),
@@ -118,14 +120,24 @@ class _StudentViewState extends State<StudentView> {
               lstCity.isEmpty
                   ? const Text("No data found")
                   : Expanded(
-                    child: ListView.builder(
+                    child: ListView.separated(
+                      separatorBuilder:
+                          (context, index) => const Divider(
+                            color: Colors.black,
+                            height: 2,
+                            thickness: 1,
+                          ),
+                      physics: const BouncingScrollPhysics(),
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.all(8),
+                      scrollDirection: Axis.vertical,
                       itemCount: lstStudent.length,
                       itemBuilder: (context, index) {
                         return ListTile(
                           title: Text(
-                            "${lstStudent[index]["first_name"]} ${lstStudent[index]["last_name"]}",
+                            "${lstStudent[index].fname} ${lstStudent[index].lname}",
                           ),
-                          subtitle: Text(lstStudent[index]["city"]),
+                          subtitle: Text(lstStudent[index].city),
                           trailing: IconButton(
                             icon: const Icon(Icons.delete),
                             onPressed: () {
@@ -134,6 +146,16 @@ class _StudentViewState extends State<StudentView> {
                               });
                             },
                           ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (context) =>
+                                        OutputView(student: lstStudent[index]),
+                              ),
+                            );
+                          },
                         );
                       },
                     ),
