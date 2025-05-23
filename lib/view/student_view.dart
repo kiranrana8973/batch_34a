@@ -142,7 +142,32 @@ class _StudentViewState extends State<StudentView> {
                             icon: const Icon(Icons.delete),
                             onPressed: () {
                               setState(() {
-                                lstStudent.removeAt(index);
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: const Text("Delete"),
+                                      content: const Text(
+                                        "Are you sure you want to delete this item?",
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text("Cancel"),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            lstStudent.removeAt(index);
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text("Delete"),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
                               });
                             },
                           ),
